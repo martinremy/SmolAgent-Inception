@@ -5,11 +5,13 @@
 import os
 import requests
 from typing import List, Dict, Optional
+from dotenv import load_dotenv
 
 from smolagents import CodeAgent, WebSearchTool, Model, ChatMessage
 from smolagents.models import MessageRole
 
-# Set these up in .env and run uv with `uv run --env-file .env main.py`
+# Load environment variables from .env file
+load_dotenv()
 
 api_key = os.getenv("INCEPTION_API_KEY")
 if api_key is None:

@@ -71,8 +71,25 @@ def main():
     model = InceptionModel(model_id="mercury")
     agent = CodeAgent(tools=[WebSearchTool()], model=model, stream_outputs=False)
 
-    result = agent.run("Can a Cessna 172S fly over the top of Mt Kilimanjaro? If not, explain why.")
-    print(result)
+    print("Welcome! Ask me questions (type 'exit' or 'quit' to stop).\n")
+
+    while True:
+        try:
+            question = input("Your question: ").strip()
+
+            if question.lower() in ['exit', 'quit', '']:
+                print("Goodbye!")
+                break
+
+            result = agent.run(question)
+            print(f"\nAnswer: {result}\n")
+
+        except KeyboardInterrupt:
+            print("\n\nGoodbye!")
+            break
+        except Exception as e:
+            print(f"\nError: {e}\n")
+            continue
 
 if __name__ == "__main__":
     main()
